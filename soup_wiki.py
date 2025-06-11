@@ -1,3 +1,7 @@
+'''
+요약:
+이 코드는 위키피디아의 Beautiful Soup 문서에서 첫 번째 문단을 가져와, 80자 단위로 줄 바꿈해 출력하는 간단한 웹 스크래핑 예제입니다.
+'''
 import requests                # 웹 페이지 요청을 위한 라이브러리
 from bs4 import BeautifulSoup  # HTML 파싱을 위한 라이브러리
 import textwrap                # 텍스트 줄바꿈(포매팅) 라이브러리
