@@ -1,3 +1,37 @@
+'''
+이 코드는 YouTube에서 오디오를 다운로드하고, OpenAI API를 이용해 오디오를 텍스트로 변환(트랜스크립션)한 뒤, 변환된 텍스트를 잘라서 프롬프트와 컴플리션 데이터로 만들고, 이를 활용해 GPT-3 모델을 파인튜닝하는 전체 과정을 담고 있습니다.
+
+아래는 주요 동작 단계별 설명입니다:
+
+라이브러리 임포트
+
+youtube_dl: 유튜브 영상에서 오디오 다운로드에 사용
+openai: OpenAI API 사용
+os: 파일 경로 등 OS 관련 작업
+OpenAI API Key 설정
+
+openai.api_key에 본인의 API 키를 입력해야 합니다.
+오디오 트랜스크립션 함수 정의
+
+transcribe_audio(audio_file): 오디오 파일을 입력받아, OpenAI의 Completion API를 호출해 텍스트로 변환합니다. 실제로는 audio file path가 아니라 텍스트 스트링이 prompt로 들어가 있으니, 실제 오디오 트랜스크립션에는 적합하지 않습니다.
+YouTube에서 오디오 다운로드
+
+youtube_dl 옵션을 설정해서 가장 좋은 오디오 품질로 영상 다운로드 및 wav 파일로 추출합니다.
+오디오 트랜스크립션 및 데이터 분할
+
+변환된 텍스트를 일정 길이(prompt_length, completion_length)로 잘라서, 프롬프트와 컴플리션 리스트를 생성합니다.
+GPT-3 파인튜닝
+
+위에서 만든 프롬프트, 컴플리션을 사용해 OpenAI의 FineTune API로 모델을 파인튜닝합니다.
+파인튜닝 옵션(에폭, 배치 사이즈, 러닝레이트 등)을 직접 지정합니다.
+결과 출력
+
+파인튜닝된 모델의 ID를 출력합니다.
+주의
+
+실제 OpenAI의 트랜스크립션(음성→텍스트)은 Completion API가 아닌 Whisper API 등 다른 엔드포인트를 사용해야 하며, 이 코드는 예시 수준입니다.
+실제로 파인튜닝을 하려면 데이터 포맷, API 사용법 등 추가적인 보완이 필요합니다.
+'''
 import youtube_dl
 import openai
 import os
